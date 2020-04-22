@@ -10,15 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Objects;
 
-@Entity
-@Table(name = "contas")
 public class Conta {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_cliente")
     private Cliente titular;
 
     private String numero;
