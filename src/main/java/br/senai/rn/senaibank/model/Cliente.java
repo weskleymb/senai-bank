@@ -10,9 +10,11 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table()
+@Table(name = "cliente")
 public class Cliente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
