@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @GetMapping("/")
-    @ResponseBody
     public String index() {
-        Cliente jadson = new Cliente("Jadson", "111222", Sexo.MASCULINO);
-        Conta contaJadson = new Conta(jadson, "1234-5", 500.0);
-
-        return contaJadson.getTitular().getNome();
+        return "index";
     }
 
 }

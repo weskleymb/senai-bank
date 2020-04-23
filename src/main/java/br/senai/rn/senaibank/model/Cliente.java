@@ -21,6 +21,7 @@ public class Cliente {
 
     private String cpf;
 
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
     public Cliente() {}

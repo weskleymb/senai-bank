@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link th:rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link th:rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron mt-3">
+            <h1 class="display-4">Clientes do Banco</h1>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>nome</th>
+                <th>cpf</th>
+                <th>sexo</th>
+                <th>ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.id}">id</td>
+                <td th:text="${cliente.nome}">nome</td>
+                <td th:text="${cliente.cpf}">cpf</td>
+                <td th:text="${cliente.sexo}">sexo</td>
+                <td>
+                    <a th:href="@{/clientes/form/{id}(id=${cliente.id})}"
+                       class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+        <div class="jumbotron">
+            <p class="lead">Developer by <strong>Weskley Bezerra</strong></p>
+        </div>
+
+    </div>
+
+</body>
+</html>
