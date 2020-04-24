@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-br" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>layout</title>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" th:rel="stylesheet">
+    <link th:href="@{/fontawesome/css/all.css}" th:rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div th:insert="fragments/header :: header">cabecalho</div>
+    <div layout:fragment="content">conteudo</div>
+    <div th:insert="fragments/footer :: footer">rodape</div>
+</div>
+</body>
+</html>

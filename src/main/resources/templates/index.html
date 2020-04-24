@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<html layout:decorator="fragments/layout" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-<a th:href="@{/clientes/lista}">Página de Clientes</a>
+
+<div layout:fragment="content">
+
+    <h1>Teste</h1>
+
+</div>
+
 </body>
 </html>
