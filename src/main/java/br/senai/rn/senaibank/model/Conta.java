@@ -12,7 +12,8 @@ public class Conta {
 
     private Double saldo;
 
-    public Conta() {}
+    public Conta() {
+    }
 
     public Conta(Cliente titular, String numero, Double saldo) {
         this.titular = titular;

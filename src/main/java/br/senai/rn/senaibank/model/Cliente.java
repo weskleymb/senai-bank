@@ -24,7 +24,8 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    public Cliente() {}
+    public Cliente() {
+    }
 
     public Cliente(String nome, String cpf, Sexo sexo) {
         this.nome = nome;
