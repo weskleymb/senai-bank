@@ -19,11 +19,12 @@ public class ClienteService {
     }
 
     public Cliente buscaPorId(Long id) {
-        Optional<Cliente> optional = repository.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-        return null;
+//        Optional<Cliente> optional = repository.findById(id);
+//        if (optional.isPresent()) {
+//            return optional.get();
+//        }
+//        return null;
+        return repository.findById(id).orElse(null);
     }
 
     public Cliente buscaPorCpf(String cpf) {

@@ -1,5 +1,6 @@
 package br.senai.rn.senaibank.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -7,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -24,14 +29,9 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    public Cliente() {
-    }
-
-    public Cliente(String nome, String cpf, Sexo sexo) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.sexo = sexo;
-    }
+    @Column(name = "data_nascimento")
+    @Temporal(TemporalType.DATE)
+    private Date dataNascimento;
 
     public Long getId() {
         return id;
@@ -65,20 +65,25 @@ public class Cliente {
         this.sexo = sexo;
     }
 
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) &&
-                Objects.equals(nome, cliente.nome) &&
-                Objects.equals(cpf, cliente.cpf) &&
-                sexo == cliente.sexo;
+        return id.equals(cliente.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, cpf, sexo);
+        return Objects.hash(id);
     }
 
 }
