@@ -29,9 +29,9 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    @Column(name = "data_nascimento")
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+//    @Column(name = "data_nascimento")
+//    @Temporal(TemporalType.DATE)
+//    private Date dataNascimento;
 
     public Long getId() {
         return id;
@@ -65,13 +65,13 @@ public class Cliente {
         this.sexo = sexo;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+//    public Date getDataNascimento() {
+//        return dataNascimento;
+//    }
+//
+//    public void setDataNascimento(Date dataNascimento) {
+//        this.dataNascimento = dataNascimento;
+//    }
 
     @Override
     public boolean equals(Object o) {

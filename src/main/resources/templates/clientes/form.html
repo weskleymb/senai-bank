@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Formulário de Clientes</title>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" th:rel="stylesheet">
+    <link th:href="@{/fontawesome/css/all.css}" th:rel="stylesheet">
 </head>
 <body>
+
+<div class="container">
+
+    <div class="jumbotron mt-3">
+        <h1 class="display-4">Cadastro de Clientes</h1>
+    </div>
+
+    <form method="post" th:object="${cliente}" th:action="@{/clientes/novo}">
+
+        <label>
+            <input type="text" th:field="*{nome}" placeholder="Nome">
+        </label>
+
+        <label>
+            <input type="text" th:field="*{cpf}" placeholder="CPF">
+        </label>
+
+        <label>
+            <select th:field="*{sexo}">
+                <option th:each="sexo : ${sexos}"
+                        th:value="${sexo.name()}"
+                        th:text="${sexo}">Sexo</option>
+            </select>
+        </label>
+
+        <button type="submit">Salvar</button>
+
+    </form>
+
+</div>
 
 </body>
 </html>
