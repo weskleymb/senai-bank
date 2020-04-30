@@ -10,31 +10,65 @@
 
 <div class="container">
 
-    <div class="jumbotron mt-3">
-        <h1 class="display-4">Cadastro de Clientes</h1>
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="jumbotron mt-3">
+                <h1 class="display-4">Cadastro de Clientes</h1>
+            </div>
+
+            <form method="post" th:object="${cliente}" th:action="@{/clientes/novo}">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-group">
+                    <label>Nome:</label>
+                    <input type="text" class="form-control" th:field="*{nome}" placeholder="Nome">
+                </div>
+
+                <div class="form-group">
+                    <label>CPF:</label>
+                    <input type="text" class="form-control" th:field="*{cpf}" placeholder="CPF">
+                </div>
+
+                <div class="form-group">
+                    <label>Sexo:</label>
+                    <select class="form-control" th:field="*{sexo}">
+                        <option th:each="sexo : ${sexos}"
+                                th:value="${sexo.name()}"
+                                th:text="${sexo}">Sexo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <span><i class="fas fa-save"></i> Salvar</span>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <a th:href="@{/clientes/lista}" class="btn btn-danger btn-block">
+                                <span><i class="fas fa-backspace"></i> Voltar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+
+
+
     </div>
 
-    <form method="post" th:object="${cliente}" th:action="@{/clientes/novo}">
 
-        <label>
-            <input type="text" th:field="*{nome}" placeholder="Nome">
-        </label>
 
-        <label>
-            <input type="text" th:field="*{cpf}" placeholder="CPF">
-        </label>
 
-        <label>
-            <select th:field="*{sexo}">
-                <option th:each="sexo : ${sexos}"
-                        th:value="${sexo.name()}"
-                        th:text="${sexo}">Sexo</option>
-            </select>
-        </label>
 
-        <button type="submit">Salvar</button>
-
-    </form>
 
 </div>
 

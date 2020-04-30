@@ -19,11 +19,6 @@ public class ClienteService {
     }
 
     public Cliente buscaPorId(Long id) {
-//        Optional<Cliente> optional = repository.findById(id);
-//        if (optional.isPresent()) {
-//            return optional.get();
-//        }
-//        return null;
         return repository.findById(id).orElse(null);
     }
 
@@ -39,4 +34,7 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
+    public void remover(Cliente cliente) {
+        repository.delete(cliente);
+    }
 }
