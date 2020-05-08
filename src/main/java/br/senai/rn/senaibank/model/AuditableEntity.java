@@ -10,9 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PreUpdate;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDate;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -21,33 +19,31 @@ public abstract class AuditableEntity implements PersistableEntity<Long> {
     @CreatedDate
     @Column(nullable = false, updatable = false, name = "data_criacao")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataCriacao = new Date();
+    private LocalDate dataCriacao = LocalDate.now();
 
     @LastModifiedDate
     @Column(name = "data_modificacao")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataModificacao;
+    private LocalDate dataModificacao;
 
     @Column(name = "ativo")
     private Boolean ativo;
 
     @JsonIgnore
-    public Date getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
+    public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
     @JsonIgnore
-    public Date getDataModificacao() {
+    public LocalDate getDataModificacao() {
         return dataModificacao;
     }
 
-    public void setDataModificacao(Date dataModificacao) {
+    public void setDataModificacao(LocalDate dataModificacao) {
         this.dataModificacao = dataModificacao;
     }
 
@@ -62,7 +58,7 @@ public abstract class AuditableEntity implements PersistableEntity<Long> {
 
     @PreUpdate
     public void preUpdate() {
-        this.dataModificacao = new Date();
+        this.dataModificacao = LocalDate.now();
     }
 
 }
