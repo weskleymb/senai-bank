@@ -11,6 +11,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PreUpdate;
 import java.time.LocalDate;
+import java.time.LocalDate;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -27,7 +28,7 @@ public abstract class AuditableEntity implements PersistableEntity<Long> {
     private LocalDate dataModificacao;
 
     @Column(name = "ativo")
-    private Boolean ativo = true;
+    private Boolean ativo = Boolean.TRUE;
 
     @JsonIgnore
     public LocalDate getDataCriacao() {

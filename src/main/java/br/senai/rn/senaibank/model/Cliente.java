@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "cliente")
+@Table(name = "clientes")
 public class Cliente extends AuditableEntity {
 
     @Id

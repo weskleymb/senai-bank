@@ -15,33 +15,26 @@ import java.util.Optional;
 public interface GenericRepository<T extends AuditableEntity> extends JpaRepository<T, Long> {
 
     @Override
-    @Query(value = "select entity from #{#entityName} entity where entity.ativo = true")
+    @Query(value = "SELECT entity FROM #{#entityName} entity WHERE entity.ativo = TRUE")
     List<T> findAll();
 
     @Override
-    @Query(value = "select entity from #{#entityName} entity where entity.ativo = true and entity.id = :id")
+    @Query(value = "SELECT entity FROM #{#entityName} entity WHERE entity.ativo = TRUE AND entity.id = :id")
     Optional<T> findById(@Param(value = "id") Long id);
 
     @Override
     @Transactional
     @Modifying
-    @Query(value = "update #{#entityName} entity set entity.ativo = false where entity = :entity")
+    @Query(value = "UPDATE #{#entityName} entity SET entity.ativo = FALSE WHERE entity = :entity")
     void delete(@Param(value = "entity") T entity);
 
     @Override
     @Transactional
     @Modifying
-    @Query(value = "update #{#entityName} entity set entity.ativo = false where entity.id = :id")
+    @Query(value = "UPDATE #{#entityName} entity SET entity.ativo = FALSE WHERE entity.id = :id")
     void deleteById(@Param(value = "id") Long id);
 
-    @Override
-    default void deleteAll(Iterable<? extends T> iterable) {
-        iterable.forEach(entity -> {
-            deleteById(entity.getId());
-        });
-    }
-
-    @Query(value = "select count (entity) from #{#entityName} entity where entity.ativo = true")
+    @Query(value = "SELECT COUNT(entity) FROM #{#entityName} entity WHERE entity.ativo = TRUE")
     Long countAtivo();
 
 }
