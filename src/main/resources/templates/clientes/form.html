@@ -18,38 +18,39 @@
                 <h1 class="display-4">Cadastro de Clientes</h1>
             </div>
 
-            <form method="post" th:object="${cliente}" th:action="@{/clientes/novo}">
+            <form method="post" th:action="@{/clientes/novo}" th:object="${cliente}">
 
-                <input type="hidden" th:field="*{id}">
+                <input th:field="*{id}" type="hidden">
 
                 <div class="form-group">
                     <label>Nome:</label>
-                    <input type="text" class="form-control" th:field="*{nome}" placeholder="Nome">
+                    <input class="form-control" placeholder="Nome" th:field="*{nome}" type="text">
                 </div>
 
                 <div class="form-group">
                     <label>CPF:</label>
-                    <input type="text" class="form-control" th:field="*{cpf}" placeholder="CPF">
+                    <input class="form-control" placeholder="CPF" th:field="*{cpf}" type="text">
                 </div>
 
                 <div class="form-group">
                     <label>Sexo:</label>
                     <select class="form-control" th:field="*{sexo}">
                         <option th:each="sexo : ${sexos}"
-                                th:value="${sexo.name()}"
-                                th:text="${sexo}">Sexo</option>
+                                th:text="${sexo}"
+                                th:value="${sexo.name()}">Sexo
+                        </option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <div class="row">
                         <div class="col-6">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button class="btn btn-primary btn-block" type="submit">
                                 <span><i class="fas fa-save"></i> Salvar</span>
                             </button>
                         </div>
                         <div class="col-6">
-                            <a th:href="@{/clientes/lista}" class="btn btn-danger btn-block">
+                            <a class="btn btn-danger btn-block" th:href="@{/clientes/lista}">
                                 <span><i class="fas fa-backspace"></i> Voltar</span>
                             </a>
                         </div>
@@ -62,12 +63,7 @@
         </div>
 
 
-
     </div>
-
-
-
-
 
 
 </div>
