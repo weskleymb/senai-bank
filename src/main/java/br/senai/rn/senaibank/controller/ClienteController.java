@@ -3,6 +3,7 @@ package br.senai.rn.senaibank.controller;
 import br.senai.rn.senaibank.model.Cliente;
 import br.senai.rn.senaibank.model.Sexo;
 import br.senai.rn.senaibank.service.ClienteService;
+import br.senai.rn.senaibank.service.impl.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class ClienteController {
 
     @GetMapping(value = "/lista")
     public String buscaTodos(Model model) {
-        List<Cliente> clientes = service.buscaTodos();
+        List<Cliente> clientes = service.findAll();
         model.addAttribute("clientes", clientes);
         return "clientes/list";
     }
@@ -42,13 +43,13 @@ public class ClienteController {
     @PostMapping(value = "/novo")
     public String salvaCliente(Cliente cliente) {
         System.out.println("VER AQUI");
-        service.salva(cliente);
+        service.save(cliente);
         return "redirect:/clientes/lista";
     }
 
     @GetMapping(value = "/{id}/editar")
     public String editar(@PathVariable(value = "id") Long id, Model model) {
-        Cliente cliente = service.buscaPorId(id);
+        Cliente cliente = service.findById(id);
         if (cliente == null) {
             return "clientes/list";
         }
@@ -62,9 +63,9 @@ public class ClienteController {
 
     @GetMapping(value = "/{id}/remover")
     public String remover(@PathVariable(value = "id") Long id) {
-        Cliente cliente = service.buscaPorId(id);
+        Cliente cliente = service.findById(id);
         if (cliente != null) {
-            service.remover(cliente);
+            service.delete(cliente.getId());
         }
         return "redirect:/clientes/lista";
     }
