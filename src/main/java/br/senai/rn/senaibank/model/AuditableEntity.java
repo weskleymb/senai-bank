@@ -27,7 +27,7 @@ public abstract class AuditableEntity implements PersistableEntity<Long> {
     private LocalDate dataModificacao;
 
     @Column(name = "ativo")
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     @JsonIgnore
     public LocalDate getDataCriacao() {

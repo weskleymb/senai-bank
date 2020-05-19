@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Objects;
 
 @Data
 @Entity
@@ -26,9 +25,5 @@ public class Cliente extends AuditableEntity {
 
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
-
-//    @Column(name = "data_nascimento")
-//    @Temporal(TemporalType.DATE)
-//    private Date dataNascimento;
 
 }
