@@ -1,5 +1,7 @@
 package br.senai.rn.senaibank.security;
 
+import br.senai.rn.senaibank.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,7 +17,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-    @Override // Requisições
+    @Autowired
+    private UsuarioService usuario;
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .anyRequest().authenticated()
@@ -23,12 +28,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/sair"));
     }
 
-    @Override // Usuarios
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("senai")
-                .password("12345")
-                .roles("ADMIN");
+//        auth.inMemoryAuthentication()
+//                .withUser("senai")
+//                .password("12345")
+//                .roles("ADMIN");
+        auth.userDetailsService(usuario);
     }
 
     @Override

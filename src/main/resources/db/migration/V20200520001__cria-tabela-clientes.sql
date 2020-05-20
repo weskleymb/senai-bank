@@ -1,4 +1,4 @@
-create table clientes
+create table if not exists clientes
 (
     id               bigint       not null auto_increment,
     ativo            bit(1)       not null,
