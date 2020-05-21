@@ -4,6 +4,8 @@ import br.senai.rn.senaibank.model.AuditableEntity;
 import br.senai.rn.senaibank.service.GenericService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 
+@Controller
 public abstract class GenericController<T extends AuditableEntity> {
 
     protected static final String EDIT = "/{id}/edit";
@@ -26,15 +29,15 @@ public abstract class GenericController<T extends AuditableEntity> {
     @Autowired
     private GenericService<T> service;
 
-    protected String page(String path) {
+    protected String page(String page) {
         return getControllerName()
-                .concat(StringUtils.isNotEmpty(path) ? path : "");
+                .concat(StringUtils.isNotEmpty(page) ? page : "");
     }
 
-    protected String redirect(String path) {
+    protected String redirect(String url) {
         return "redirect:"
                 .concat(getMapping())
-                .concat(StringUtils.isNotEmpty(path) ? path : "");
+                .concat(StringUtils.isNotEmpty(url) ? url : "");
     }
 
     @GetMapping
@@ -44,8 +47,8 @@ public abstract class GenericController<T extends AuditableEntity> {
     }
 
     @GetMapping(value = NOT_FOUND)
-    public String notFound() {
-        return "page-not-found";
+    public String pageNotFound() {
+        return "error/404";
     }
 
     @PostMapping
@@ -68,7 +71,7 @@ public abstract class GenericController<T extends AuditableEntity> {
     public String edit(@PathVariable(value = "id") Long id, Model model) {
         T entity = service.findById(id);
         if (entity == null) {
-            return redirect(NOT_FOUND);
+            return pageNotFound();
         }
         model.addAttribute(getEntityName(), entity);
         return page(FORM);
@@ -78,7 +81,7 @@ public abstract class GenericController<T extends AuditableEntity> {
     public String remove(@PathVariable(value = "id") Long id) {
         T entity = service.findById(id);
         if (entity == null) {
-            return redirect("not-found");
+            return pageNotFound();
         }
         service.delete(entity.getId());
         return redirect(null);

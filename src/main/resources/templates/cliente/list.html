@@ -12,13 +12,19 @@
 
     <div class="jumbotron mt-3">
         <h1 class="display-4">Clientes do Banco</h1>
+        <hr class="my-4">
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-outline-dark" th:href="@{/sair}">
+                <span class=""><i class="fas fa-sign-out-alt"></i> Sair</span>
+            </a>
+        </div>
     </div>
 
     <fieldset>
         <div class="d-flex justify-content-between align-middle mb-2">
-            <legend style="width: 50%">Lista de Clientes</legend>
-            <a class="btn btn-primary" th:href="@{/clientes/form}">
-                <span><i class="fas fa-user-plus"></i> Novo Cliente</span>
+            <legend>Lista de Clientes</legend>
+            <a class="btn btn-primary" title="Novo Contato" th:href="@{/clientes/form}">
+                <i class="fas fa-user-plus align-middle"></i>
             </a>
         </div>
 

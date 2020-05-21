@@ -6,14 +6,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
+    private final String HOME_URL = "/";
+    private final String LOGIN_URL = "/entrar";
+    private final String LOGOUT_URL = "/sair";
+
+    @GetMapping(value = HOME_URL)
     public String index() {
-        return "index";
+        return "public/index";
     }
 
-    @GetMapping(value = "/entrar")
+    @GetMapping(value = LOGIN_URL)
     public String login() {
-        return "login";
+        return "public/login";
+    }
+
+    @GetMapping(value = LOGOUT_URL)
+    public String logout() {
+        return redirect(LOGIN_URL);
+    }
+
+    private String redirect(String url) {
+        return "redirect:" + url;
     }
 
 }

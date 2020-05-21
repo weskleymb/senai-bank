@@ -9,24 +9,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/clientes")
 public class ClienteController extends GenericController<Cliente> {
 
-    private List<Sexo> sexos = Arrays.asList(Sexo.MASCULINO, Sexo.FEMININO);
-
     @Override
     public String form(Model model) {
-        model.addAttribute("sexos", sexos);
+        model.addAttribute("sexos", Arrays.asList(Sexo.values()));
         return super.form(model);
     }
 
     @Override
     @GetMapping(value = EDIT)
     public String edit(@PathVariable(value = "id") Long id, Model model) {
-        model.addAttribute("sexos", sexos);
+        model.addAttribute("sexos", Arrays.asList(Sexo.values()));
         return super.edit(id, model);
     }
 
