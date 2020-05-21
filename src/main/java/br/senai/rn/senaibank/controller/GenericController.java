@@ -46,11 +46,6 @@ public abstract class GenericController<T extends AuditableEntity> {
         return page(LIST);
     }
 
-    @GetMapping(value = NOT_FOUND)
-    public String pageNotFound() {
-        return "error/404";
-    }
-
     @PostMapping
     public String save(T entity) {
         service.save(entity);
@@ -70,20 +65,18 @@ public abstract class GenericController<T extends AuditableEntity> {
     @GetMapping(value = EDIT)
     public String edit(@PathVariable(value = "id") Long id, Model model) {
         T entity = service.findById(id);
-        if (entity == null) {
-            return pageNotFound();
+        if (entity != null) {
+            model.addAttribute(getEntityName(), entity);
         }
-        model.addAttribute(getEntityName(), entity);
         return page(FORM);
     }
 
     @GetMapping(value = REMOVE)
     public String remove(@PathVariable(value = "id") Long id) {
         T entity = service.findById(id);
-        if (entity == null) {
-            return pageNotFound();
+        if (entity != null) {
+            service.delete(entity.getId());
         }
-        service.delete(entity.getId());
         return redirect(null);
     }
 
