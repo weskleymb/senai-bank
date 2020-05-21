@@ -1,6 +1,7 @@
 package br.senai.rn.senaibank.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -43,7 +44,7 @@ public class Usuario extends AuditableEntity implements UserDetails {
     private List<Permissao> permissoes;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public List<Permissao> getAuthorities() {
         return this.permissoes;
     }
 

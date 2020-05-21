@@ -1,6 +1,7 @@
 package br.senai.rn.senaibank.security;
 
 import br.senai.rn.senaibank.service.UsuarioService;
+import br.senai.rn.senaibank.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,10 +31,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("senai")
-//                .password("12345")
-//                .roles("ADMIN");
         auth.userDetailsService(usuario);
     }
 
