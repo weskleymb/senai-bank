@@ -19,7 +19,7 @@ public abstract class GenericController<T extends AuditableEntity> {
     protected static final String FORM = "/form";
     protected static final String LIST = "/list";
     protected static final String REMOVE = "/{id}/remove";
-    protected static final String NOT_FOUND = "/not-found";
+    protected static final String NOT_FOUND = "/page-not-found";
     protected static final String SUFIXO_CONTROLLER = "Controller";
     protected static final String SUFIXO_LISTA = "List";
 
@@ -40,13 +40,12 @@ public abstract class GenericController<T extends AuditableEntity> {
     @GetMapping
     public String list(Model model) {
         model.addAttribute(getEntityListName(), service.findAll());
-        System.out.println(page(LIST));
         return page(LIST);
     }
 
     @GetMapping(value = NOT_FOUND)
     public String notFound() {
-        return "not-found";
+        return "page-not-found";
     }
 
     @PostMapping

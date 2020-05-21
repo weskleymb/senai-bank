@@ -4,6 +4,8 @@ import br.senai.rn.senaibank.model.Cliente;
 import br.senai.rn.senaibank.model.Sexo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
@@ -22,7 +24,8 @@ public class ClienteController extends GenericController<Cliente> {
     }
 
     @Override
-    public String edit(Long id, Model model) {
+    @GetMapping(value = EDIT)
+    public String edit(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("sexos", sexos);
         return super.edit(id, model);
     }
