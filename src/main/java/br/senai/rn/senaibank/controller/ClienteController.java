@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 
@@ -22,9 +23,9 @@ public class ClienteController extends GenericController<Cliente> {
 
     @Override
     @GetMapping(value = EDIT)
-    public String edit(@PathVariable(value = "id") Long id, Model model) {
+    public String edit(@PathVariable(value = "id") Long id, Model model, RedirectAttributes attributes) {
         model.addAttribute("sexos", Arrays.asList(Sexo.values()));
-        return super.edit(id, model);
+        return super.edit(id, model, attributes);
     }
 
 }

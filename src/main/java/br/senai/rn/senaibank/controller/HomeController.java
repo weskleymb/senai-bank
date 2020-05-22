@@ -2,31 +2,34 @@ package br.senai.rn.senaibank.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
 
-    private final String HOME_URL = "/";
-    private final String LOGIN_URL = "/entrar";
-    private final String LOGOUT_URL = "/sair";
+    protected static final String HOME = "/";
+    protected static final String LOGIN = "/entrar";
+    protected static final String LOGOUT = "/sair";
+    protected static final String NOT_FOUND = "/page-not-found";
 
-    @GetMapping(value = HOME_URL)
+    @GetMapping(value = HOME)
     public String index() {
         return "public/index";
     }
 
-    @GetMapping(value = LOGIN_URL)
+    @GetMapping(value = LOGIN)
     public String login() {
         return "public/login";
     }
 
-    @GetMapping(value = LOGOUT_URL)
+    @PostMapping(value = LOGOUT)
     public String logout() {
-        return redirect(LOGIN_URL);
+        return "redirect:" + LOGIN;
     }
 
-    private String redirect(String url) {
-        return "redirect:" + url;
+    @GetMapping(value = NOT_FOUND)
+    public String notFound() {
+        return "public/not-found";
     }
 
 }

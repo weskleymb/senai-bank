@@ -1,4 +1,4 @@
-package br.senai.rn.senaibank.service.impl;
+package br.senai.rn.senaibank.service.implementation;
 
 import br.senai.rn.senaibank.model.AuditableEntity;
 import br.senai.rn.senaibank.repositoy.GenericRepository;
@@ -11,23 +11,27 @@ import java.util.List;
 
 @Service
 @Transactional
-public abstract class GenericServiceImpl<T extends AuditableEntity> implements GenericService<T> {
+public abstract class GenericServiceImplementation<T extends AuditableEntity> implements GenericService<T> {
 
     @Autowired
     private GenericRepository<T> repository;
 
+    @Override
     public T save(T entity) {
         return repository.save(entity);
     }
 
+    @Override
     public void delete(Long id) {
         repository.deleteById(id);
     }
 
+    @Override
     public List<T> findAll() {
         return repository.findAll();
     }
 
+    @Override
     public T findById(Long id) {
         return repository.findById(id).orElse(null);
     }

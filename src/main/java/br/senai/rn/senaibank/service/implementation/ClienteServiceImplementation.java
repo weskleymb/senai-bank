@@ -1,4 +1,4 @@
-package br.senai.rn.senaibank.service.impl;
+package br.senai.rn.senaibank.service.implementation;
 
 import br.senai.rn.senaibank.model.Cliente;
 import br.senai.rn.senaibank.repositoy.ClienteRepository;
@@ -10,14 +10,14 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class ClienteServiceImpl extends GenericServiceImpl<Cliente> implements ClienteService {
+public class ClienteServiceImplementation extends GenericServiceImplementation<Cliente> implements ClienteService {
 
     @Autowired
-    private ClienteRepository repository;
+    private ClienteRepository clienteRepository;
 
     @Override
     public Cliente findByCpf(String cpf) {
-        return repository.findByCpf(cpf).orElse(null);
+        return clienteRepository.findByCpf(cpf).orElse(null);
     }
 
 }
