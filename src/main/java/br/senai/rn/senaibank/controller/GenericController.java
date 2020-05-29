@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -19,6 +20,7 @@ public abstract class GenericController<T extends AuditableEntity> {
 
     protected static final String LISTA = "/lista";
     protected static final String FORMULARIO = "/formulario";
+    protected static final String EDITAR = "/{id}/editar";
     protected static final String REMOVER = "/{id}/remover";
 
     @Autowired
@@ -29,7 +31,6 @@ public abstract class GenericController<T extends AuditableEntity> {
         String lista = getNomeEntidadeLista();
         List<T> entidades = service.buscaTodos();
         model.addAttribute(lista, entidades);
-        System.out.println(lista);
         return pagina(LISTA);
     }
 
@@ -48,29 +49,35 @@ public abstract class GenericController<T extends AuditableEntity> {
         return pagina(FORMULARIO);
     }
 
-    @PostMapping
-    public String salva(T entidade) {
-        service.salva(entidade);
-        return redireciona(LISTA);
-    }
-
-    @PostMapping(value = REMOVER)
-    public String remover(@PathVariable(value = "id") Long id) {
+    @GetMapping(value = EDITAR)
+    public String editar(@PathVariable(value = "id") Long id, Model modelo) {
         T entidade = service.buscaPorId(id);
         if (ObjectUtils.isNotEmpty(entidade)) {
-            service.remover(entidade);
+            String nomeEntidade = getNomeEntidade();
+            modelo.addAttribute(nomeEntidade, entidade);
+            return pagina(FORMULARIO);
         }
         return redireciona(LISTA);
     }
 
-//    @GetMapping(value = "/{id}/remover")
-//    public String remover(@PathVariable(value = "id") Long id) {
-//        Cliente cliente = service.buscaPorId(id);
-//        if (cliente != null) {
-//            service.remover(cliente);
-//        }
-//        return "redirect:/clientes/lista";
-//    }
+    @PostMapping
+    public String salva(T entidade, RedirectAttributes atributos) {
+        service.salva(entidade);
+        String mensagem = setMensagem(entidade, "cadastrado com sucesso!!!");
+        atributos.addFlashAttribute("sucesso", mensagem);
+        return redireciona(LISTA);
+    }
+
+    @PostMapping(value = REMOVER)
+    public String remover(@PathVariable(value = "id") Long id, RedirectAttributes atributos) {
+        T entidade = service.buscaPorId(id);
+        if (ObjectUtils.isNotEmpty(entidade)) {
+            service.remover(entidade);
+            String mensagem = setMensagem(entidade, "removido com sucesso!!!");
+            atributos.addFlashAttribute("sucesso", mensagem);
+        }
+        return redireciona(LISTA);
+    }
 
     protected String pagina(String pagina) {
         return getNomeControlador().concat(pagina);
@@ -80,6 +87,14 @@ public abstract class GenericController<T extends AuditableEntity> {
         return "redirect:"
                 + getMapeamento()
                 + (StringUtils.isEmpty(url) || url.equals(LISTA) ? StringUtils.EMPTY : url);
+    }
+
+    protected String setMensagem(T entidade, String mensagem) {
+        return entidade.getClass().getSimpleName()
+                + " "
+                + entidade.getId()
+                + " "
+                + mensagem;
     }
 
     protected String getMapeamento() {
