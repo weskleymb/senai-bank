@@ -18,7 +18,7 @@
                 <h1 class="display-4">Cadastro de Clientes</h1>
             </div>
 
-            <form method="post" th:action="@{/clientes/novo}" th:object="${cliente}">
+            <form method="post" th:action="@{/clientes}" th:object="${cliente}">
 
                 <input th:field="*{id}" type="hidden">
 
