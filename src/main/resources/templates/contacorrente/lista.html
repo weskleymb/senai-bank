@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" th:rel="stylesheet">
+    <link th:href="@{/fontawesome/css/all.css}" th:rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="jumbotron mt-3">
+        <h1 class="display-4">Contas Correntes do Banco</h1>
+        <hr>
+        <div class="d-flex justify-content-end">
+            <a th:href="@{/sair}" class="btn btn-dark">Sair</a>
+        </div>
+    </div>
+
+    <div class="alert alert-success" role="alert" th:if="${sucesso}">
+        <span th:text="${sucesso}">Mensagem de sucesso</span>
+    </div>
+
+    <fieldset>
+        <div class="d-flex justify-content-between">
+            <legend>Lista de Contas</legend>
+            <a class="btn btn-primary" th:href="@{/clientes/formulario}">Novo Cliente</a>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>titular</th>
+                <th>saldo</th>
+                <th>ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contaCorrente : ${contasCorrentes}">
+                <td th:text="${contaCorrente.id}">id</td>
+                <td th:text="${contaCorrente.titular.nome}">titular</td>
+                <td th:text="${contaCorrente.saldo}">saldo</td>
+                <td>
+
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </fieldset>
+
+
+</div>
+
+</body>
+</html>
