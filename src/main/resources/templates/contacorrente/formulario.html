@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Clientes</title>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" th:rel="stylesheet">
+    <link th:href="@{/fontawesome/css/all.css}" th:rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <nav th:insert="fragments/header.html :: cabecalho"></nav>
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="jumbotron mt-3">
+                <h1 class="display-4">Cadastro de Contas</h1>
+            </div>
+
+            <form method="post" th:action="@{/contasCorrentes}" th:object="${contaCorrente}">
+
+                <input th:field="*{id}" type="hidden">
+
+                <div class="form-group">
+                    <label>Agência:</label>
+                    <input class="form-control" placeholder="Agência" th:field="*{agencia}" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label>CPF:</label>
+                    <input class="form-control" placeholder="CPF" th:field="*{titular.cpf}" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label>Saldo:</label>
+                    <input class="form-control" placeholder="Saldo" th:field="*{saldo}" type="text">
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-primary btn-block" type="submit">
+                                <span><i class="fas fa-save"></i> Salvar</span>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <a class="btn btn-danger btn-block" th:href="@{/contasCorrentes}">
+                                <span><i class="fas fa-backspace"></i> Voltar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

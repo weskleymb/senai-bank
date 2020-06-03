@@ -25,7 +25,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/entrar").permitAll().defaultSuccessUrl("/clientes/lista")
+                .and().formLogin().loginPage("/entrar").permitAll().defaultSuccessUrl("/")
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/sair")).logoutSuccessUrl("/entrar");
     }
 

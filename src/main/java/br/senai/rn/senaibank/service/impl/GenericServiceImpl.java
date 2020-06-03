@@ -1,7 +1,7 @@
 package br.senai.rn.senaibank.service.impl;
 
 import br.senai.rn.senaibank.model.AuditableEntity;
-import br.senai.rn.senaibank.repositoy.GenericRepository;
+import br.senai.rn.senaibank.repository.GenericRepository;
 import br.senai.rn.senaibank.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

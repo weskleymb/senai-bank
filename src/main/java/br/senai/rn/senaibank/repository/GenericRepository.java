@@ -1,4 +1,4 @@
-package br.senai.rn.senaibank.repositoy;
+package br.senai.rn.senaibank.repository;
 
 import br.senai.rn.senaibank.model.AuditableEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

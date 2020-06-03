@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html layout:decorator="fragments/layout" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Senai Bank</title>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" th:rel="stylesheet">
+    <link th:href="@{/fontawesome/css/all.css}" th:rel="stylesheet">
 </head>
 <body>
 
-<div layout:fragment="content">
+    <div class="container mt-4">
 
-    <h1>Teste</h1>
+        <nav th:insert="fragments/header.html :: cabecalho"></nav>
 
-</div>
+        <div class="jumbotron mt-3">
+            <p>Bem vindo ao <strong>Senai Bank</strong>, aqui seu dinheiro vale mais...</p>
+        </div>
+
+    </div>
 
 </body>
 </html>
