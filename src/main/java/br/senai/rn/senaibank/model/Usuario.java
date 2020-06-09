@@ -3,6 +3,7 @@ package br.senai.rn.senaibank.model;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,6 +76,10 @@ public class Usuario extends AuditableEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = new BCryptPasswordEncoder().encode(senha);
     }
 
 }
